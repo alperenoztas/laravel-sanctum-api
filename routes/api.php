@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::apiResource('products', ProductController::class);
-
+Route::get('products/search/{name}', [ProductController::class, 'search']);
 
 // Route::get('/products',[ProductController::class,'index']);
 // Route::post('/products',[ProductController::class,'store']);
