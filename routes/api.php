@@ -15,13 +15,23 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::apiResource('products', ProductController::class);
+
+
+//Route::apiResource('products', ProductController::class);
+
+//Public routes
+Route::get('/products',[ProductController::class,'index']);
+Route::get('/product/{id}',[ProductController::class,'show']);
 Route::get('products/search/{name}', [ProductController::class, 'search']);
 
-// Route::get('/products',[ProductController::class,'index']);
-// Route::post('/products',[ProductController::class,'store']);
-// Route::get('/product/{id}',[ProductController::class,'show']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Protected routes
+Route::group(['middleware' => ['auth:sanctum']],function(){
+    Route::post('/products',[ProductController::class,'store']);
+    Route::put('/products/{id}',[ProductController::class,'update']);
+    Route::delete('/products/{id}',[ProductController::class,'destroy']);
 });
+
+
+
+
