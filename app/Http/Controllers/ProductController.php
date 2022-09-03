@@ -67,6 +67,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $deletedProduct = Product:find($id)->get();
         return Product::destroy($id);
     }
 
